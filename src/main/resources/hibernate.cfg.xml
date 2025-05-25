@@ -1,0 +1,12 @@
+<hibernate-configuration xmlns="http://www.hibernate.org/xsd/orm/cfg">
+    <session-factory>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">898127</property>
+        <property name="hibernate.show_sql ">true</property>
+        <property name="hbm2ddl.auto">update</property>
+
+        <mapping class="org.example.User"/>
+    </session-factory>
+</hibernate-configuration>
