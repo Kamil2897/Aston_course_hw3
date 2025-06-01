@@ -5,19 +5,20 @@ import static org.example.UserService.scanner;
 
 public class Main {
     public static void main(String[] args) {
+        UserService userService = new UserService();
         while (true) {
-            UserService.menu();
+            userService.menu();
             if (scanner.hasNextInt()) {
                 int choice = scanner.nextInt();
                 if (choice == 1) {
                     scanner.nextLine();
-                    UserService.createUser();
+                    userService.createUser();
                 } else if (choice == 2) {
-                    UserService.readUser();
+                    userService.readUser();
                 } else if (choice == 3) {
-                    UserService.updateUser();
+                    userService.updateUser();
                 } else if (choice == 4) {
-                    UserService.deleteUser();
+                    userService.deleteUser();
                 } else if (choice == 5) {
                     break;
                 } else {

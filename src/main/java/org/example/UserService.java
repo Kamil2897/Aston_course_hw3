@@ -6,11 +6,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Scanner;
 
 public class UserService {
+
     static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private static UserDAO userDAO = new UserDAO();
     static Scanner scanner = new Scanner(System.in);
 
-    public static void menu() {
+    public void menu() {
         logger.info("Меню:");
         System.out.println("1. Создать пользователя");
         System.out.println("2. Найти пользователя");
@@ -19,7 +20,7 @@ public class UserService {
         System.out.println("5. Завершить работу");
     }
 
-    public static void createUser() {
+    public void createUser() {
         User user = new User();
         logger.info("Введите имя нового пользователя:");
         user.setName(scanner.nextLine());
@@ -38,7 +39,7 @@ public class UserService {
         }
     }
 
-    public static void readUser() {
+    public void readUser() {
         logger.info("Введите ID пользователя:");
         User user = userDAO.read(scanner.nextInt());
         logger.info("Имя пользователя: " + user.getName());
@@ -47,7 +48,7 @@ public class UserService {
         logger.info("Дата создания записи: " + user.getCreatedAt());
     }
 
-    public static void updateUser() {
+    public void updateUser() {
         User user = new User();
         logger.info("Введите ID пользователя:");
         user.setId(scanner.nextInt());
@@ -63,7 +64,7 @@ public class UserService {
         }
     }
 
-    public static void deleteUser() {
+    public void deleteUser() {
         logger.info("Введите ID пользователя");
         Integer id = scanner.nextInt();
         User user = userDAO.read(id);

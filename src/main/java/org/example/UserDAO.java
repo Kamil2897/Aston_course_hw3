@@ -11,6 +11,12 @@ public class UserDAO {
     private static final Logger logger = LoggerFactory.getLogger(UserDAO.class);
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
+    public UserDAO(){}
+
+    public UserDAO(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     public int create(User user) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
