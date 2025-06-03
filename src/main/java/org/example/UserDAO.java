@@ -4,14 +4,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class UserDAO {
-    private static final Logger logger = LoggerFactory.getLogger(UserDAO.class);
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-    public UserDAO(){}
+    public UserDAO() {
+    }
 
     public UserDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -26,7 +24,7 @@ public class UserDAO {
                 return user.getId();
             } catch (Exception e) {
                 transaction.rollback();
-                logger.error("Невозможно создать пользователя: данный email уже используется!");
+                e.printStackTrace();
                 return 0;
             }
         }
@@ -35,6 +33,9 @@ public class UserDAO {
     public User read(Integer id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(User.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -47,7 +48,7 @@ public class UserDAO {
                 return true;
             } catch (Exception e) {
                 transaction.rollback();
-                logger.error("Невозможно обновить данные: данный email уже используется!");
+                e.printStackTrace();
                 return false;
             }
         }
@@ -61,7 +62,7 @@ public class UserDAO {
                 transaction.commit();
             } catch (Exception e) {
                 transaction.rollback();
-                logger.error("При попытке удаления произошла ошибка!");
+                e.printStackTrace();
             }
         }
     }

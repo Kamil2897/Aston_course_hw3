@@ -46,8 +46,8 @@ public class User {
         return age;
     }
 
-    public void setAge(int age) throws IllegalArgumentException{
-        if(age < 0 || age > 120){
+    public void setAge(int age) throws IllegalArgumentException {
+        if (age < 0 || age > 120) {
             throw new IllegalArgumentException();
         }
         this.age = age;
@@ -55,5 +55,21 @@ public class User {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return id == user.id && name == user.name && email == user.email && age == user.age && createdAt == user.createdAt;
     }
 }

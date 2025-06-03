@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -21,6 +22,7 @@ public class UserDAOIntegrationTest {
 
     static SessionFactory sessionFactory;
     static UserDAO userDAO;
+    private static final Logger logger = null;
 
     @BeforeAll
     static void setup() {
@@ -53,7 +55,7 @@ public class UserDAOIntegrationTest {
     }
 
     @Test
-    void read() {
+    void read_WhenUserExists() {
         User user = new User();
         user.setName("Test2");
         user.setEmail("Test2@gmail.com");
@@ -61,6 +63,12 @@ public class UserDAOIntegrationTest {
         int id = userDAO.create(user);
         User created = userDAO.read(id);
         Assert.assertEquals("Test2@gmail.com", created.getEmail());
+    }
+
+    @Test
+    void read_WhenUserIsNotExists() {
+        User created = userDAO.read(100);
+        Assert.assertNull(created);
     }
 
     @Test
